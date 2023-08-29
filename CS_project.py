@@ -6,3 +6,7 @@ mydb.autocommit = True
 
 cur.execute("create database Pendragon")
 
+mycursor = mydb.cursor()
+mycursor.execute("show tables")
+for i in mycursor:
+    print(i)
