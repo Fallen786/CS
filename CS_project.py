@@ -1,9 +1,10 @@
-
 import mysql.connector
+mydb = mysql.connector.connect(host="localhost",user="Fowl",password="root")
+cur = mydb.cursor()
+mydb.autocommit = True
 
-mydb = mysql.connector.connect(host="localhost",user="root",password="bruh",database="academia")
+cur.execute("create database Pendragon")
 
-mycursor = mydb.cursor()
-mycursor.execute("show tables")
-for i in mycursor:
+cur.execute("show tables")
+for i in cur:
     print(i)
