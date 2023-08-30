@@ -1,5 +1,5 @@
 import mysql.connector as mc
-mydb = mc.connect(host="localhost",user="root",password="root",database="alpha")
+mydb = mc.connect(host="localhost",user="root",password="root",database="eSports")
 cur = mydb.cursor()
 mydb.autocommit = True
 if mydb.is_connected():
@@ -42,15 +42,17 @@ def menu():
     elif x=='8':
         exit()
     elif x=='guide':
-        print('''1. Display upcoming matches
+        print('''
+1. Display upcoming matches
 2. Display team score
 3. Add a player
 4. Edit a team
 5. Search a player
 6. Update player details
 7. Remove a player
-8. Exit''')
+8. Exit
+''')
     else:
-        pass
+        print("INVALID INPUT! Try Again")
     menu()
 menu()
