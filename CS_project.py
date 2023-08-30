@@ -1,9 +1,20 @@
 import mysql.connector as mc
-mydb = mc.connect(host="localhost",user="root",password="root",database="eSports")
+mydb = mc.connect(host="localhost",user="root",password="root",database="alpha")
 cur = mydb.cursor()
 mydb.autocommit = True
 if mydb.is_connected():
     print('Succesfully connected')
+
+def upcoming_matches():
+    t=int(input('Team (1 or 2): '))
+    if t==1:
+        team='team1'
+    elif t==2:
+        team='team2'
+    cur.execute('SELECT * FROM schedule WHERE Team={team}')
+    for i in cur:
+        print(i)
+
 
 print('''------------------------------
 ESPORTS TEAM MANAGEMENT SYSTEM
@@ -26,7 +37,7 @@ Welcome
 def menu():
     x=input('Enter your choice:')
     if x=='1':
-        pass
+        upcoming-matches()
     elif x=='2':
         pass
     elif x=='3':
@@ -42,17 +53,15 @@ def menu():
     elif x=='8':
         exit()
     elif x=='guide':
-        print('''
-1. Display upcoming matches
+        print('''1. Display upcoming matches
 2. Display team score
 3. Add a player
 4. Edit a team
 5. Search a player
 6. Update player details
 7. Remove a player
-8. Exit
-''')
+8. Exit''')
     else:
-        print("INVALID INPUT! Try Again")
+        print('Invalid option')
     menu()
 menu()
