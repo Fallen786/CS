@@ -15,7 +15,8 @@ def upcoming_matches():
     o = cur.fetchall()
     for i in o:
         for a in i:
-            print (a)
+            print (a,end=", ")
+        print()
 
 def teamscore():
     t=int(input('Team (1 or 2): '))
