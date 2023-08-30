@@ -11,11 +11,22 @@ def upcoming_matches():
         team='team1'
     elif t==2:
         team='team2'
-    q_1=f'SELECT * FROM schedule WHERE Team={team}'
+    q_1=f'SELECT * FROM schedule WHERE Participant={team}'
     cur.execute(q_1)
     o=cur.fetchall
     for i in o:
         print(i)
+
+def teamscore():
+    t=int(input('Team (1 or 2): '))
+    if t==1:
+        team='team1'
+    elif t==2:
+        team='team2'
+    q_2=f'SELECT SUM(Player_Score) FROM {team}'
+    cur.execute(q_2)
+    for i in cur:
+    print('For the selected team, the team score will be', i[0])
 
 
 print('''------------------------------
@@ -41,7 +52,7 @@ def menu():
     if x=='1':
         upcoming_matches()
     elif x=='2':
-        pass
+        teamscore()
     elif x=='3':
         pass
     elif x=='4':
