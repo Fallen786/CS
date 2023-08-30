@@ -26,7 +26,7 @@ def teamscore():
     q_2=f'SELECT SUM(Player_Score) FROM {team}'
     cur.execute(q_2)
     for i in cur:
-    print('For the selected team, the team score will be', i[0])
+        print('For the selected team, the team score will be', i[0])
 
 
 print('''------------------------------
