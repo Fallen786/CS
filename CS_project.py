@@ -68,20 +68,55 @@ def remove():
     l1=[]
     print("Note- Players playing for either teams cannot be removed.")
     rem = int(input("Input Tag of player to be removed: "))
-    q_6_1= f"select tag from information where tag = {rem}"
-    cur.execute(q_6_1)
+    q_7_1= f"select tag from information where tag = {rem}"
+    cur.execute(q_7_1)
     for i in cur:
         l.append(i[0])
-    q_6_2 = f"select tag from team1 where tag = {rem}"
-    cur.execute(q_6_2)
+    q_7_2 = f"select tag from team1 where tag = {rem}"
+    cur.execute(q_7_2)
     for j in cur:
         l1.append(j[0])
     if l == l1:
         print("Can't execute command because player already exist in a team")
     else:
-        q_6 = f"delete from information where tag = {rem}"
-        cur.execute(q_6)
+        q_7 = f"delete from information where tag = {rem}"
+        cur.execute(q_7)
         print("Player has been removed successfully.")
+
+def swap():
+    l = []
+    team = ""
+    a = int(input("Enter 1 to swap players from team1 or 2 to swap players from team2: "))
+    if a == 1:
+        team+="team1"
+    elif a == 2:
+        team+="team2"
+    x = input("Enter tag of player to swap: ")
+    y = input("Enter tag of player to be swapped with: ")
+    q = f"select * from information where tag = {x}"
+    cur.execute(q)
+    for i in cur:
+        for j in range(6):
+            l.append(i[j])
+    z_0 = l[0]
+    z_1 = l[1]
+    z_2 = l[2]
+    z_3 = l[3]
+    z_4 = l[4]
+    z_5 = l[5]
+    q_4_1 = f"update {team} set player_id = '{z_1}' where tag = {y}"
+    cur.execute(q_4_1)
+    q_4_2 = f"update {team} set player_name = '{z_2}' where tag = {y}"
+    cur.execute(q_4_2)
+    q_4_3 = f"update {team} set player_score = {z_3} where tag = {y}"
+    cur.execute(q_4_3)
+    q_4_4 = f"update {team} set region = '{z_4}' where tag = {y}"
+    cur.execute(q_4_4)
+    q_4_5 = f"update {team} set regional_rank = {z_5} where tag = {y}"
+    cur.execute(q_4_5)
+    q_4_0 = f"update {team} set tag = {z_0} where tag = {y}"
+    cur.execute(q_4_0)
+    print("Players has been swapped successfully.")
 
 print('''------------------------------
 ESPORTS TEAM MANAGEMENT SYSTEM
@@ -106,7 +141,7 @@ def menu():
     elif x=='3':
         add_player()
     elif x=='4':
-        pass
+        swap()
     elif x=='5':
         search()
     elif x=='6':
