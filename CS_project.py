@@ -1,10 +1,10 @@
 import mysql.connector as mc
-mydb = mc.connect(host="localhost",user="root",password="bruh",database="eSports")
+mydb = mc.connect(host="localhost",user="root",password="root",database="eSports")
 cur = mydb.cursor()
 mydb.autocommit = True
 if mydb.is_connected():
     print('Succesfully connected')
-    
+
 def upcoming_matches():
     t=int(input('Team (1 or 2): '))
     if t==1:
