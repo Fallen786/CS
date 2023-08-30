@@ -63,6 +63,26 @@ def update():
         cur.execute(q_6)
     print("Player details has been updated successfully.")
 
+def remove():
+    l = []
+    l1=[]
+    print("Note- Players playing for either teams cannot be removed.")
+    rem = int(input("Input Tag of player to be removed: "))
+    q_6_1= f"select tag from information where tag = {rem}"
+    cur.execute(q_6_1)
+    for i in cur:
+        l.append(i[0])
+    q_6_2 = f"select tag from team1 where tag = {rem}"
+    cur.execute(q_6_2)
+    for j in cur:
+        l1.append(j[0])
+    if l == l1:
+        print("Can't execute command because player already exist in a team")
+    else:
+        q_6 = f"delete from information where tag = {rem}"
+        cur.execute(q_6)
+        print("Player has been removed successfully.")
+
 print('''------------------------------
 ESPORTS TEAM MANAGEMENT SYSTEM
 ------------------------------
@@ -92,7 +112,7 @@ def menu():
     elif x=='6':
         update()
     elif x=='7':
-        pass
+        remove()
     elif x=='8':
         exit()
     elif x=='guide':
