@@ -12,9 +12,10 @@ def upcoming_matches():
     elif t==2:
         q_1="SELECT * FROM schedule WHERE Participant='team2'"
     cur.execute(q_1)
-    o=cur.fetchall
+    o = cur.fetchall()
     for i in o:
-        print(i)
+        for a in i:
+            print (a)
 
 def teamscore():
     t=int(input('Team (1 or 2): '))
