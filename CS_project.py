@@ -11,8 +11,10 @@ def upcoming_matches():
         team='team1'
     elif t==2:
         team='team2'
-    cur.execute('SELECT * FROM schedule WHERE Team={team}')
-    for i in cur:
+    q_1='SELECT * FROM schedule WHERE Team={team}'
+    cur.execute(q_1)
+    o=cur.fetchall
+    for i in o:
         print(i)
 
 
