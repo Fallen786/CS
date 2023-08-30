@@ -35,7 +35,19 @@ def add_player():
     ps = int(input("Enter player score: "))
     rn = input("Enter Region: ")
     rr = int(input("Enter Regional Rank: "))
-    cur.execute(f"Insert into information values({tag},'{pi}','{pn}',{ps},'{rn}',{rr})")
+    q_3 = f"Insert into information values({tag},'{pi}','{pn}',{ps},'{rn}',{rr})"
+    cur.execute(q_3)
+    print("Player has been added successfully.")
+
+def search():
+    s = input("Enter Tag: ")
+    q_5 = f"Select * from information where Tag = '{s}'"
+    cur.execute(q_5)
+    o = cur.fetchall()
+    for i in o:
+        for a in i:
+            print (a,end=", ")
+        print()
 
 print('''------------------------------
 ESPORTS TEAM MANAGEMENT SYSTEM
@@ -62,7 +74,7 @@ def menu():
     elif x=='4':
         pass
     elif x=='5':
-        pass
+        search()
     elif x=='6':
         pass
     elif x=='7':
