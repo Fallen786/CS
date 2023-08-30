@@ -8,10 +8,9 @@ if mydb.is_connected():
 def upcoming_matches():
     t=int(input('Team (1 or 2): '))
     if t==1:
-        team='team1'
+        q_1="SELECT * FROM schedule WHERE Participant='team1'"
     elif t==2:
-        team='team2'
-    q_1=f'SELECT * FROM schedule WHERE Participant={team}'
+        q_1="SELECT * FROM schedule WHERE Participant='team2'"
     cur.execute(q_1)
     o=cur.fetchall
     for i in o:
