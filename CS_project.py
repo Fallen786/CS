@@ -1,5 +1,5 @@
-import mysql.connector
-mydb = mysql.connector.connect(host="localhost",user="Fowl",password="root")
+import mysql.connector as mc
+mydb = mc.connect(host="localhost",user="Fowl",password="root")
 cur = mydb.cursor()
 mydb.autocommit = True
 
