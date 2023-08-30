@@ -1,9 +1,10 @@
 import mysql.connector as mc
-mydb = mc.connect(host="localhost",user="root",password="root",database="eSports")
+mydb = mc.connect(host="localhost",user="root",password="bruh",database="eSports")
 cur = mydb.cursor()
 mydb.autocommit = True
 if mydb.is_connected():
     print('Succesfully connected')
+    
 def upcoming_matches():
     t=int(input('Team (1 or 2): '))
     if t==1:
@@ -49,6 +50,19 @@ def search():
             print (a,end=", ")
         print()
 
+def update():
+    print("Available columns to update: Tag, Player_ID, Player_Name, Player_Score, Region, Regional_Rank")
+    col = input("Select column to update: ")
+    row = input("Select tag to update: ")
+    up = input("Update details: ")
+    if col.lower() == "tag" or col.lower() == "player_score" or col.lower() == "regional_rank":
+        q_6 = f"Update information set {col} = {up} where tag = {row}"
+        cur.execute(q_6)
+    elif col.lower() == "player_id" or col.lower() == "player_name" or col.lower() == "region":
+        q_6 = f"Update information set {col} = '{up}' where tag = {row}"
+        cur.execute(q_6)
+    print("Player details has been updated successfully.")
+
 print('''------------------------------
 ESPORTS TEAM MANAGEMENT SYSTEM
 ------------------------------
@@ -76,7 +90,7 @@ def menu():
     elif x=='5':
         search()
     elif x=='6':
-        pass
+        update()
     elif x=='7':
         pass
     elif x=='8':
