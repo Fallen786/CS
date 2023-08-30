@@ -42,7 +42,14 @@ def menu():
     elif x=='8':
         exit()
     elif x=='guide':
-        pass
+        print('''1. Display upcoming matches
+2. Display team score
+3. Add a player
+4. Edit a team
+5. Search a player
+6. Update player details
+7. Remove a player
+8. Exit''')
     else:
         pass
     menu()
