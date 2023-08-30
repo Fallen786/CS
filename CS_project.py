@@ -27,6 +27,16 @@ def teamscore():
     cur.execute(q_2)
     for i in cur:
         print('For the selected team, the team score will be', i[0])
+
+def add_player():
+    tag = int(input("Enter tag: "))
+    pi = input("Enter player id: ")
+    pn = input("Enter player name: ")
+    ps = int(input("Enter player score: "))
+    rn = input("Enter Region: ")
+    rr = int(input("Enter Regional Rank: "))
+    cur.execute(f"Insert into information values({tag},'{pi}','{pn}',{ps},'{rn}',{rr})")
+
 print('''------------------------------
 ESPORTS TEAM MANAGEMENT SYSTEM
 ------------------------------
@@ -48,7 +58,7 @@ def menu():
     elif x=='2':
         teamscore()
     elif x=='3':
-        pass
+        add_player()
     elif x=='4':
         pass
     elif x=='5':
