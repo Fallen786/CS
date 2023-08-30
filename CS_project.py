@@ -16,6 +16,7 @@ def upcoming_matches():
     for i in o:
         for a in i:
             print (a)
+        print()
 
 def teamscore():
     t=int(input('Team (1 or 2): '))
