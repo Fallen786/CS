@@ -46,11 +46,12 @@ def teamscore():
 def add_player():
     tag = int(input("Enter tag: "))
     pi = input("Enter player id: ")
-    pn = input("Enter player name: ")
+    pr = input("Enter player role: ")
     ps = int(input("Enter player score: "))
+    pn = input("Enter player name: ")
     rn = input("Enter Region: ")
     rr = int(input("Enter Regional Rank: "))
-    q_3 = f"Insert into information values({tag},'{pi}','{pn}',{ps},'{rn}',{rr})"
+    q_3 = f"Insert into information values({tag},'{pi}','{pr}',{ps},'{pn}','{rn}',{rr})"
     cur.execute(q_3)
     print("Player has been added successfully.")
 
