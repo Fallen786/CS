@@ -10,15 +10,27 @@ def upcoming_matches():
     if t==1:
         q_1="select * from schedule where Participant='team1'"
     elif t==2:
-        q_1="select+ * from schedule where Participant='team2'"
+        q_1="select * from schedule where Participant='team2'"
     cur.execute(q_1)
     records = cur.fetchall()
     for row in records:
         print('League:',row[0] )
         print('Date:',row[1] )
         print('Participant:',row[2] )
-        print('Prize:',row[3] )
+        print('Prize:',row[3],'$')
         print() 
+
+def roster():
+    D={}
+    t=int(input("Team (1 or 2): "))
+    if t==1:
+        team='team1'
+    if t==2:
+        team='team2'
+    cur.execute(f"select * from {team}")
+    for i in cur:
+        D['Tag']=i[0];D['PlayerID']=i[1];D['Role']=i[2];D['Performance']=i[3]
+        print(D)
 
 def teamscore():
     t=int(input('Team (1 or 2): '))
@@ -141,13 +153,14 @@ ESPORTS TEAM MANAGEMENT SYSTEM
 ------------------------------
 Welcome
 1. Display upcoming matches
-2. Display team score
-3. Add a player
-4. Edit a team
-5. Search a player
-6. Update player details
-7. Remove a player
-8. Exit
+2. Display team members
+3. Display team score
+4. Add a player
+5. Edit a team
+6. Search a player
+7. Update player details
+8. Remove a player
+9. Exit
 (To see this guide again, type in 'guide')
 ''')
 def menu():
@@ -155,28 +168,32 @@ def menu():
     if x=='1':
         upcoming_matches()
     elif x=='2':
-        teamscore()
+        roster()
     elif x=='3':
-        add_player()
+        teamscore()
     elif x=='4':
-        swap()
+        add_player()
     elif x=='5':
-        search()
+        swap()
     elif x=='6':
-        update()
+        search()
     elif x=='7':
-        remove()
+        update()
     elif x=='8':
+        remove()
+    elif x=='9':
         exit()
     elif x.lower()=='guide':
-        print('''1. Display upcoming matches
-2. Display team score
-3. Add a player
-4. Edit a team
-5. Search a player
-6. Update player details
-7. Remove a player
-8. Exit''')
+        print('''
+1. Display upcoming matches
+2. Display team members
+3. Display team score
+4. Add a player
+5. Edit a team
+6. Search a player
+7. Update player details
+8. Remove a player
+9. Exit''')
     else:
         print('Invalid option')
     menu()
