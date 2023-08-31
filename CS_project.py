@@ -84,39 +84,50 @@ def remove():
         print("Player has been removed successfully.")
 
 def swap():
-    l = []
-    team = ""
-    a = int(input("Enter 1 to swap players from team1 or 2 to swap players from team2: "))
-    if a == 1:
-        team+="team1"
-    elif a == 2:
-        team+="team2"
-    x = input("Enter tag of player to swap: ")
-    y = input("Enter tag of player to be swapped with: ")
-    q = f"select * from information where tag = {x}"
-    cur.execute(q)
-    for i in cur:
-        for j in range(6):
-            l.append(i[j])
-    z_0 = l[0]
-    z_1 = l[1]
-    z_2 = l[2]
-    z_3 = l[3]
-    z_4 = l[4]
-    z_5 = l[5]
-    q_4_1 = f"update {team} set player_id = '{z_1}' where tag = {y}"
-    cur.execute(q_4_1)
-    q_4_2 = f"update {team} set player_name = '{z_2}' where tag = {y}"
-    cur.execute(q_4_2)
-    q_4_3 = f"update {team} set player_score = {z_3} where tag = {y}"
-    cur.execute(q_4_3)
-    q_4_4 = f"update {team} set region = '{z_4}' where tag = {y}"
-    cur.execute(q_4_4)
-    q_4_5 = f"update {team} set regional_rank = {z_5} where tag = {y}"
-    cur.execute(q_4_5)
-    q_4_0 = f"update {team} set tag = {z_0} where tag = {y}"
-    cur.execute(q_4_0)
-    print("Players has been swapped successfully.")
+    print('''
+How would you like to swap players?
+1. Between Teams
+2. From Reserve to Teams
+''')
+    Ch= int(input("Enter choice: "))
+    if Ch == 1:
+        xTag=int(input("Enter Tag of player to swap from Team 1: "))
+        cur.execute(f'select * from team1 where Tag = {xTag}')
+        for i in cur:
+            xID= i[1]
+            xRole= i[2]
+            xScore= i[3]
+        yTag=int(input("Enter Tag of player to swap from Team 2: "))
+        cur.execute(f'select * from team2 where Tag = {yTag}')
+        for j in cur:
+            yID= j[1]
+            yRole= j[2]
+            yScore= j[3]
+
+        q1 = f"Update team1 set Tag={yTag},Player_ID='{yID}',Role='{yRole}',Player_Score={yScore} where Tag = {xTag}"
+        q2 = f"Update team2 set Tag={xTag},Player_ID='{xID}',Role='{xRole}',Player_Score={xScore} where Tag = {yTag}"
+        cur.execute(q1)
+        cur.execute(q2)
+        print('Swap Successfull!')
+    elif Ch == 2:
+        T_Ch= int(input("Swap with Team (1 or 2)?: "))
+        if T_Ch == 1:
+            team= 'team1'
+        elif T_Ch == 2:
+            team= 'team2'
+        else:
+            print("Invalid Input")
+        xTag=int(input('Enter Tag of player from team to swap: '))
+        zTag=int(input('Enter Tag of reserve to swap: '))
+        cur.execute(f"select * from information where Tag = {zTag}")
+        for i in cur:
+            zID= i[1]
+            zRole= i[2]
+            zScore= i[3]
+
+        q1 = f"Update {team} set Tag={zTag},Player_ID='{zID}',Role='{zRole}',Player_Score={zScore} where Tag = {xTag}"
+        cur.execute(q1)
+        print('Swap successfull')
 
 print('''------------------------------
 ESPORTS TEAM MANAGEMENT SYSTEM
@@ -150,7 +161,7 @@ def menu():
         remove()
     elif x=='8':
         exit()
-    elif x=='guide':
+    elif x.lower()=='guide':
         print('''1. Display upcoming matches
 2. Display team score
 3. Add a player
