@@ -3,20 +3,22 @@ mydb = mc.connect(host="localhost",user="root",password="root",database="eSports
 cur = mydb.cursor()
 mydb.autocommit = True
 if mydb.is_connected():
-    print('Succesfully connected')
+    print('Successfully connected')
 
 def upcoming_matches():
     t=int(input('Team (1 or 2): '))
     if t==1:
-        q_1="SELECT * FROM schedule WHERE Participant='team1'"
+        q_1="select * from schedule where Participant='team1'"
     elif t==2:
-        q_1="SELECT * FROM schedule WHERE Participant='team2'"
+        q_1="select+ * from schedule where Participant='team2'"
     cur.execute(q_1)
-    o = cur.fetchall()
-    for i in o:
-        for a in i:
-            print (a,end=", ")
-        print()
+    records = cur.fetchall()
+    for row in records:
+        print('League:',row[0] )
+        print('Date:',row[1] )
+        print('Participant:',row[2] )
+        print('Prize:',row[3] )
+        print() 
 
 def teamscore():
     t=int(input('Team (1 or 2): '))
@@ -44,10 +46,15 @@ def search():
     s = input("Enter Tag: ")
     q_5 = f"Select * from information where Tag = '{s}'"
     cur.execute(q_5)
-    o = cur.fetchall()
-    for i in o:
-        for a in i:
-            print (a,end=", ")
+    records = cur.fetchall()
+    for row in records:
+        print('Tag:',row[0] )
+        print('Player ID:',row[1] )
+        print('Role:',row[2] )
+        print('Player score:',row[3] )
+        print('Player name:',row[4] )
+        print('Region:',row[5] )
+        print('Regional rank:',row[6] )
         print()
 
 def update():
