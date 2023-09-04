@@ -73,6 +73,8 @@ def search():
     q_5 = f"Select * from information where Tag = '{s}'"
     cur.execute(q_5)
     records = cur.fetchall()
+    if records == []:
+        print("Player not found")
     for row in records:
         print('Tag:',row[0] )
         print('Player ID:',row[1] )
