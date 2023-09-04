@@ -38,7 +38,7 @@ def teamscore():
         team='team1'
     elif t==2:
         team='team2'
-    q_2=f'SELECT SUM(Player_Score) FROM {team}'
+    q_2=f'select sum(Player_Score) from {team}'
     cur.execute(q_2)
     for i in cur:
         print('For the selected team, the team score will be', i[0])
@@ -54,6 +54,15 @@ def add_player():
     q_3 = f"Insert into information values({tag},'{pi}','{pr}',{ps},'{pn}','{rn}',{rr})"
     cur.execute(q_3)
     print("Player has been added successfully.")
+
+def add_um():
+    lg = input("Enter League name: ")
+    dt = input("Enter date (YYYY-MM-DD): ")
+    tm = input("Enter participating team (team1/team2): ")
+    pr = int(input("Enter prize money: "))
+    q_e=f"insert into schedule values('{lg}','{dt}','{tm}',{pr})"
+    cur.execute(q_e)
+    print('Match has been scheduled!')
 
 def search():
     s = input("Enter Tag: ")
@@ -154,19 +163,21 @@ How would you like to swap players?
         cur.execute(q1)
         print('Swap successfull')
 
-print('''------------------------------
+print('''________________________________________________
 ESPORTS TEAM MANAGEMENT SYSTEM
-------------------------------
+________________________________________________
 Welcome
 1. Display upcoming matches
 2. Display team members
 3. Display team score
 4. Add a player
-5. Edit a team
-6. Search a player
-7. Update player details
-8. Remove a player
-9. Exit
+5. Add an upcoming match
+6. Edit a team
+7. Search a player
+8. Update player details
+9. Remove a player
+10. Exit
+
 (To see this guide again, type in 'guide')
 ''')
 def menu():
@@ -180,14 +191,16 @@ def menu():
     elif x=='4':
         add_player()
     elif x=='5':
-        swap()
+        add_um()
     elif x=='6':
-        search()
+        swap()
     elif x=='7':
-        update()
+        search()
     elif x=='8':
-        remove()
+        update()
     elif x=='9':
+        remove()
+    elif x=='10':
         exit()
     elif x.lower()=='guide':
         print('''
@@ -195,11 +208,13 @@ def menu():
 2. Display team members
 3. Display team score
 4. Add a player
-5. Edit a team
-6. Search a player
-7. Update player details
-8. Remove a player
-9. Exit''')
+5. Add an upcoming match
+6. Edit a team
+7. Search a player
+8. Update player details
+9. Remove a player
+10. Exit
+''')
     else:
         print('Invalid option')
     menu()
