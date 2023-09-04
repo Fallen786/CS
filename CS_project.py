@@ -31,6 +31,7 @@ def roster():
     for i in cur:
         D['Tag']=i[0];D['PlayerID']=i[1];D['Role']=i[2];D['Performance']=i[3]
         print(D)
+    print()
 
 def teamscore():
     t=int(input('Team (1 or 2): '))
@@ -42,6 +43,7 @@ def teamscore():
     cur.execute(q_2)
     for i in cur:
         print('For the selected team, the team score will be', i[0])
+    print()
 
 def add_player():
     tag = int(input("Enter tag: "))
@@ -54,6 +56,7 @@ def add_player():
     q_3 = f"Insert into information values({tag},'{pi}','{pr}',{ps},'{pn}','{rn}',{rr})"
     cur.execute(q_3)
     print("Player has been added successfully.")
+    print()
 
 def add_um():
     lg = input("Enter League name: ")
@@ -63,6 +66,7 @@ def add_um():
     q_e=f"insert into schedule values('{lg}','{dt}','{tm}',{pr})"
     cur.execute(q_e)
     print('Match has been scheduled!')
+    print()
 
 def search():
     s = input("Enter Tag: ")
@@ -91,6 +95,7 @@ def update():
         q_6 = f"Update information set {col} = '{up}' where tag = {row}"
         cur.execute(q_6)
     print("Player details has been updated successfully.")
+    print()
 
 def remove():
     l = []
@@ -116,6 +121,7 @@ def remove():
         q_7 = f"delete from information where tag = {rem}"
         cur.execute(q_7)
         print("Player has been removed successfully.")
+    print()
 
 def swap():
     print('''
@@ -162,6 +168,7 @@ How would you like to swap players?
         q1 = f"Update {team} set Tag={zTag},Player_ID='{zID}',Role='{zRole}',Player_Score={zScore} where Tag = {xTag}"
         cur.execute(q1)
         print('Swap successfull')
+    print()
 
 print('''________________________________________________
 ESPORTS TEAM MANAGEMENT SYSTEM
@@ -181,7 +188,7 @@ Welcome
 (To see this guide again, type in 'guide')
 ''')
 def menu():
-    x=input('Enter your choice:')
+    x=input('Enter your choice: ')
     if x=='1':
         upcoming_matches()
     elif x=='2':
